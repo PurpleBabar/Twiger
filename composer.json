@@ -1,7 +1,22 @@
 {
+    "name": "purplebabar/twiger",
+    "type": "project",
+    "description": "A lightweight framework for intwigation",
+    "version": "1.0.1",
+    "time": "2015/03/08",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandre Lalung",
+            "email": "lalung.alexandre@gmail.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
+    	"php": ">=5.3.0",
         "twig/twig": "~1.18",
         "mustangostang/spyc": "0.5.*",
         "purplebabar/twiger": "1.0.*"
-    }
+    },
+    "prefer-stable": true
 }
