@@ -1,0 +1,7 @@
+home:
+    pattern: /home/controller/{name}
+    controller: IndexController::home
+
+second:
+    pattern: /home/template/{name}
+    template: home

@@ -1,0 +1,7 @@
+{
+    "require": {
+        "twig/twig": "~1.18",
+        "mustangostang/spyc": "0.5.*",
+        "purplebabar/twiger": "1.0.*"
+    }
+}
