@@ -19,12 +19,12 @@ $requestUri = $_SERVER['REQUEST_URI'];
 $router = new Router($routes);
 $route = $router->handle($requestUri);
 
-if (!isset($route['params'])) {
+
+if (!is_null($route) && !isset($route['params']))
 	$route['params'] = array();
-}
-if (!isset($route['route_params'])) {
+if (!is_null($route) && !isset($route['route_params']))
 	$route['route_params'] = array();
-}
+
 
 if (!is_null($route)){
 	if (isset($route['controller'])) {
