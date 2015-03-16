@@ -14,6 +14,8 @@ $routes = Spyc::YAMLLoad('app/config/routing.yml');
 
 $constants = Spyc::YAMLLoad('app/config/constants.yml');
 
+$config = Spyc::YAMLLoad('app/config/config.yml');
+
 $requestUri = $_SERVER['REQUEST_URI'];
 
 $router = new Router($routes);
@@ -25,6 +27,9 @@ if (!is_null($route) && !isset($route['params']))
 if (!is_null($route) && !isset($route['route_params']))
 	$route['route_params'] = array();
 
+$assets = new Twig_SimpleFunction('assets', function ($path) {
+	    return $path;
+});
 
 if (!is_null($route)){
 	if (isset($route['controller'])) {
@@ -34,18 +39,20 @@ if (!is_null($route)){
 		$controller = $controlling[0];
 		$controller = 'control\\'.$controller;
 		$controller = new $controller( array_merge($constants, $route['params']) );
-
-		$method= $controlling[1];
+		$controller->addFunction($assets);
+		$method = $controlling[1];
 
 		call_user_func_array(array($controller, $method), $route['route_params']);
 		
 	}elseif (isset($route['template'])) {
 
 		$twiger = new Twiger( array_merge($constants, $route['params']) );
+		$twiger->addFunction($assets);
 		$twiger->render('home.html.twig', $route['route_params'] );
 
 	}
 }else{
 	$twiger = new Twiger();
+	$twiger->addFunction($assets);
 	$twiger->render('404.html.twig', array('route' => $requestUri));
 }
