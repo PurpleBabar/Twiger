@@ -35,7 +35,7 @@ $assets = new Twig_SimpleFunction('assets', function ($path) {
 		return $config['assets'].$path;
 	else
 		return $path;
-}
+});
 
 if (!is_null($route)){
 	if (isset($route['controller'])) {
