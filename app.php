@@ -54,7 +54,7 @@ if (!is_null($route)){
 
 		$twiger = new Twiger( array_merge($constants, $route['params']) );
 		$twiger->addFunction($assets);
-		$twiger->render('home.html.twig', $route['route_params'] );
+		$twiger->render($route['template'].'.html.twig', $route['route_params'] );
 
 	}
 }else{
