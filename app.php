@@ -32,9 +32,9 @@ $constants['route'] = $route;
 $assets = new Twig_SimpleFunction('assets', function ($path) {
 	$config = Spyc::YAMLLoad('app/config/config.yml');
 	if(isset($config['assets']))
-		return $config['assets'].$path;
+		return '/'.$config['assets'].'/'.$path;
 	else
-		return $path;
+		return '/'.$path;
 });
 
 $path = new Twig_SimpleFunction('path', function ($route, $args = null) {
