@@ -69,7 +69,11 @@ if (!is_null($route)){
 	}elseif (isset($route['template'])) {
 
 		$twiger = new Twiger( array_merge($constants, $route['params']) );
+<<<<<<< HEAD
 		$twiger->addFunctions(array($assets, $path));
+=======
+		$twiger->addFunction($assets);
+>>>>>>> origin/master
 		$twiger->render($route['template'].'.html.twig', $route['route_params'] );
 
 	}
