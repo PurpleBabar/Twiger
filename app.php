@@ -37,6 +37,22 @@ $assets = new Twig_SimpleFunction('assets', function ($path) {
 		return $path;
 });
 
+$path = new Twig_SimpleFunction('path', function ($route, $args = null) {
+	$routes = Spyc::YAMLLoad('app/config/routing.yml');
+	if( isset($routes[$route]) )
+		$route = $routes[$route];
+	else
+		throw new Twig_Error_Path('No route found for '.$route);
+
+	$path = $route['pattern'];
+
+	if (!empty($args))
+		foreach ($args as $key => $value)
+			$path = preg_replace('/{'.$key.'}/', $value, $path);
+
+	return $path;
+});
+
 if (!is_null($route)){
 	if (isset($route['controller'])) {
 		
@@ -45,7 +61,7 @@ if (!is_null($route)){
 		$controller = $controlling[0];
 		$controller = 'control\\'.$controller;
 		$controller = new $controller( array_merge($constants, $route['params']) );
-		$controller->addFunction($assets);
+		$controller->addFunctions(array($assets, $path));
 		$method = $controlling[1];
 
 		call_user_func_array(array($controller, $method), $route['route_params']);
@@ -53,12 +69,12 @@ if (!is_null($route)){
 	}elseif (isset($route['template'])) {
 
 		$twiger = new Twiger( array_merge($constants, $route['params']) );
-		$twiger->addFunction($assets);
-		$twiger->render('home.html.twig', $route['route_params'] );
+		$twiger->addFunctions(array($assets, $path));
+		$twiger->render($route['template'].'.html.twig', $route['route_params'] );
 
 	}
 }else{
 	$twiger = new Twiger();
-	$twiger->addFunction($assets);
+	$twiger->addFunctions(array($assets, $path));
 	$twiger->render('404.html.twig', array('route' => $requestUri));
 }
