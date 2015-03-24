@@ -77,4 +77,5 @@ if (!is_null($route)){
 	$twiger = new Twiger();
 	$twiger->addFunctions(array($assets, $path));
 	$twiger->render('404.html.twig', array('route' => $requestUri));
+	http_response_code(404);
 }
