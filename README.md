@@ -5,11 +5,14 @@ Twiger is a standalone implementation of twig to allow you to integrate your web
 
 ## Install
 
-To install Twiger just open a terminal and install via composer with : *php composer create-project purplebabar/twiger <nameOfYourProject>*. Your server will have to point on your folder, the app.php file will do the rest ;).
+To install Twiger just open a terminal and install via composer with : *php composer create-project purplebabar/twiger nameOfYourProject*. Your server will have to point on your folder, the app.php file will do the rest ;).
 
 ## Config
 
-In the app/config/config.yml, you can configure the folder where your assets are stored, just fill *assets: nameOfYourFolder*
+In the app/config/config.yml, you can configure the folder where your assets are stored, just fill it with 
+```yaml
+assets: nameOfYourFolder
+```
 
 ## Functions
 
