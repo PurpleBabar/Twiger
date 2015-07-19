@@ -55,7 +55,7 @@ $path = new Twig_SimpleFunction('path', function ($route, $args = null) {
 
 if (!is_null($route)){
 	if (isset($route['controller'])) {
-		
+
 		$controlling = explode('::',$route['controller']);
 
 		$controller = $controlling[0];
@@ -64,18 +64,18 @@ if (!is_null($route)){
 		$controller->addFunctions(array($assets, $path));
 		$method = $controlling[1];
 
-		call_user_func_array(array($controller, $method), $route['route_params']);
-		
+		echo call_user_func_array(array($controller, $method), $route['route_params']);
+
 	}elseif (isset($route['template'])) {
 
 		$twiger = new Twiger( array_merge($constants, $route['params']) );
 		$twiger->addFunctions(array($assets, $path));
-		$twiger->render($route['template'].'.html.twig', $route['route_params'] );
+		echo $twiger->render($route['template'].'.html.twig', $route['route_params'] );
 
 	}
 }else{
 	$twiger = new Twiger();
 	$twiger->addFunctions(array($assets, $path));
-	$twiger->render('404.html.twig', array('route' => $requestUri));
+	echo $twiger->render('404.html.twig', array('route' => $requestUri));
 	http_response_code(404);
 }
