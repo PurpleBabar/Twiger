@@ -60,7 +60,7 @@ if (!is_null($route)){
 
 		$controller = $controlling[0];
 		$controller = 'control\\'.$controller;
-		$controller = new $controller( array_merge($constants, $route['params']) );
+		$controller = new $controller($config, array_merge($constants, $route['params']) );
 		$controller->addFunctions(array($assets, $path));
 		$method = $controlling[1];
 
