@@ -19,5 +19,8 @@
         "purplebabar/twiger-core": "1.0.*",
         "noetix/simple-orm": "dev-master"
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "prefer-stable": true
 }
