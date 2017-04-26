@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  front:
+    image: purplebabar/symfony
+    ports:
+      - 80:80
+    tty: true
+    extra_hosts:
+      - "dev.twiger:127.0.0.1"
+    environment:
+      - MAX_EXECUTIION_TIME=300
+      - DATE_TIMEZONE=Europe/Paris
+    volumes:
+      - ${PWD}:/var/www:rw
+      - ${PWD}/docker/host:/etc/nginx/sites-enabled:rw
+    networks:
+      - default
+
+networks:
+  default: {}
